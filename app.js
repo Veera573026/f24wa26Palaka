@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users'); // Added usersRouter import
+var usersRouter = require('./routes/users'); // Add this line
 //const mydataRouter = require('./routes/mydata');
 const computationRouter = require('./routes/computation');
 
@@ -16,15 +16,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
-app.use('/computation',computationRouter);
-app.use(express.json());
+//aapp.use('/mydata', mydataRouter);
+app.use('/computation', computationRouter);
+
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/mydata', mydataRouter);
+app.use('/users', usersRouter); // This will now work correctly
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
