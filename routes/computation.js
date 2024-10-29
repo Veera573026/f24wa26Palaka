@@ -1,6 +1,5 @@
 const express = require('express');
-const app = express();
-const port = 3000;
+const router = express.Router(); // Use router instead of app
 
 // Function to select a Math function based on ID's last digit
 function selectMathFunction(idLastDigit) {
@@ -31,7 +30,7 @@ function selectMathFunction(idLastDigit) {
 }
 
 // Computation endpoint
-app.get('/computation', (req, res) => {
+router.get('/', (req, res) => { // Change 'app.get' to 'router.get'
     const idLastDigit = 1; // Replace with the actual last digit of your ID
     const mathFunction = selectMathFunction(idLastDigit);
 
@@ -44,6 +43,4 @@ app.get('/computation', (req, res) => {
     res.send(response);
 });
 
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-});
+module.exports = router; // Export router instead of app
